@@ -102,7 +102,18 @@ async def start_command(client: Client, message: Message):
                     protect_content=PROTECT_CONTENT
                 )
             except:
-                pass
+                # Send message indicating media was deleted
+                await client.send_message(
+                    chat_id=message.from_user.id,
+                    text="**EXTREMELY SORRY BUT!!!**\n**MEDIA DELETED SUCCESSFULLY**",
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton("Watch Again", url=f"https://t.me/{client.username}?start={message.command[1]}")
+                            ]
+                        ]
+                    )
+                )
         return
     else:
         reply_markup = InlineKeyboardMarkup(
@@ -126,6 +137,7 @@ async def start_command(client: Client, message: Message):
             quote=True
         )
         return
+
 
 
     
